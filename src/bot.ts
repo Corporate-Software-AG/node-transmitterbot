@@ -20,13 +20,13 @@ export class EchoBot extends ActivityHandler {
             };
 
             // Replace this with the primary/secondary key or AMLToken for the endpoint
-            const apiKey = "ZLtQ2LEz64dofBfOfTlIj4fCQtNDRvhf";
+            const apiKey = process.env.PROMPTFLOW_API_KEY;
             if (!apiKey) {
                 throw "A key should be provided to invoke the endpoint";
             }
             requestHeaders["Authorization"] = "Bearer " + apiKey;
-            requestHeaders["azureml-model-deployment"] = "tvonment-01-chat-01-1";
-            const url = "https://tvonment-01-chat-01.switzerlandnorth.inference.ml.azure.com/score";
+            requestHeaders["azureml-model-deployment"] = process.env.PROMPTFLOW_MODEL;
+            const url = process.env.PROMPTFLOW_URL;
 
             await this.userState.saveChanges(context);
 
@@ -37,7 +37,7 @@ export class EchoBot extends ActivityHandler {
                 const response = await fetch(url, {
                     method: "POST",
                     body: JSON.stringify({
-                        question: context.activity.text,
+                        query: context.activity.text,
                         chat_history: conversationHistory.history,
                     }),
                     headers: requestHeaders,
@@ -45,15 +45,16 @@ export class EchoBot extends ActivityHandler {
 
                 if (response.ok) {
                     let data = await response.json();
-                    await context.sendActivity(MessageFactory.text(data.answer, data.answer));
+                    console.log("Received response from PromptFlow API:", data);
+                    await context.sendActivity(MessageFactory.text(data.reply, data.reply));
                     let chat_history = [];
                     chat_history.push(
                         {
                             inputs: {
-                                question: context.activity.text,
+                                query: context.activity.text,
                             },
                             outputs: {
-                                answer: data.answer,
+                                reply: data.reply,
                             },
                             chat_history: conversationHistory.history,
                         });

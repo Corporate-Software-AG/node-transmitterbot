@@ -6,7 +6,7 @@ const ENV_FILE = path.join(__dirname, '..', '.env');
 config({ path: ENV_FILE });
 
 import * as restify from 'restify';
-
+const fs = require('fs');
 import { INodeSocket } from 'botframework-streaming';
 
 // Import required bot services.
@@ -82,6 +82,12 @@ server.post('/api/messages', async (req, res) => {
     await adapter.process(req, res, async (context) => {
         await myBot.run(context);
     });
+});
+
+server.get('/', async (req, res) => {
+    res.writeHead(200, { 'content-type': 'text/html' });
+    let indexPath = path.join(__dirname, '../src', 'index.html');
+    fs.createReadStream(indexPath).pipe(res);
 });
 
 // Listen for Upgrade requests for Streaming.
