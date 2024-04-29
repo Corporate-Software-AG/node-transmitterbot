@@ -6,6 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
     <style>
+        @font-face {
+            font-family: 'AvenirNextLTPro-Regular';
+            src: url('https://strbotoni.blob.core.windows.net/assets/AvenirNextLTPro-Regular.otf') format('otf'),
+                url('https://strbotoni.blob.core.windows.net/assets/AvenirNextLTPro-Regular.otf') format('otf');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'AvenirNextLTPro-Bold';
+            src: url('https://strbotoni.blob.core.windows.net/assets/AvenirNextLTPro-Bold.otf') format('otf'),
+                url('https://strbotoni.blob.core.windows.net/assets/AvenirNextLTPro-Bold.otf') format('otf');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         html,
         body {
             height: 100%;
@@ -13,6 +29,10 @@
 
         body {
             margin: 0;
+        }
+
+        p {
+            font-family: 'AvenirNextLTPro-Regular', sans-serif;
         }
 
         #webchat {
@@ -26,6 +46,20 @@
     <div id="webchat" role="main"></div>
     <script>
         (async function () {
+            const styleOptions = {
+                // Hide upload button.
+                hideUploadButton: true,
+                botAvatarInitials: 'ONi',
+                botAvatarImage: 'https://strbotoni.blob.core.windows.net/assets/ONI_Chatbot_negativ.png',
+                primaryFont: 'AvenirNextLTPro-Regular, sans-serif',
+                bubbleBackground: '#860f91',
+                bubbleTextColor: 'white',
+                bubbleFromUserBackground: 'gray',
+                bubbleFromUserTextColor: 'white',
+                bubbleFromUserBorderRadius: 6,
+                bubbleBorderRadius: 6,
+            };
+            const locale = document.documentElement.lang || 'de';
             const res = await fetch('https://directline.botframework.com/v3/directline/tokens/generate', {
                 method: 'POST',
                 headers: {
@@ -35,7 +69,7 @@
             const { token } = await res.json();
 
             window.WebChat.renderWebChat({
-                directLine: window.WebChat.createDirectLine({ token })
+                directLine: window.WebChat.createDirectLine({ token }), locale, styleOptions
             }, document.getElementById('webchat'));
 
             document.querySelector('#webchat > *').focus();
