@@ -1,7 +1,7 @@
 import { ActivityHandler, MessageFactory, ConversationState, UserState } from 'botbuilder';
 import fetch from 'node-fetch';
 
-const WELCOME_TEXT = 'Hello, my name is ONi, how can I help you? \nI can speak different languages.';
+const WELCOME_TEXT = process.env.WELCOME_TEXT || 'Hello, my name is ONi, how can I help you? \nI can speak different languages.';
 
 export class EchoBot extends ActivityHandler {
     private conversationState: ConversationState;
