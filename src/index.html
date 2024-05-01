@@ -8,16 +8,16 @@
     <style>
         @font-face {
             font-family: 'AvenirNextLTPro-Regular';
-            src: url('https://strbotoni.blob.core.windows.net/assets/AvenirNextLTPro-Regular.otf') format('otf'),
-                url('https://strbotoni.blob.core.windows.net/assets/AvenirNextLTPro-Regular.otf') format('otf');
+            src: url('https://strbotoni.blob.core.windows.net/assets/AvenirNextLTPro-Regular.otf') format('opentype'),
+                url('https://strbotoni.blob.core.windows.net/assets/AvenirNextLTPro-Regular.otf') format('opentype');
             font-weight: normal;
             font-style: normal;
         }
 
         @font-face {
             font-family: 'AvenirNextLTPro-Bold';
-            src: url('https://strbotoni.blob.core.windows.net/assets/AvenirNextLTPro-Bold.otf') format('otf'),
-                url('https://strbotoni.blob.core.windows.net/assets/AvenirNextLTPro-Bold.otf') format('otf');
+            src: url('https://strbotoni.blob.core.windows.net/assets/AvenirNextLTPro-Bold.otf') format('opentype'),
+                url('https://strbotoni.blob.core.windows.net/assets/AvenirNextLTPro-Bold.otf') format('opentype');
             font-weight: normal;
             font-style: normal;
         }
@@ -35,6 +35,10 @@
             font-family: 'AvenirNextLTPro-Regular', sans-serif;
         }
 
+        a {
+            color: rgba(134, 15, 145, .2) !important;
+        }
+
         #webchat {
             height: 100%;
             width: 100%;
@@ -49,13 +53,17 @@
             const styleOptions = {
                 // Hide upload button.
                 hideUploadButton: true,
-                botAvatarInitials: 'ONi',
-                botAvatarImage: 'https://strbotoni.blob.core.windows.net/assets/ONI_Chatbot_negativ.png',
+                textlineHeight: 1.15,
+                avatarSize: 60,
+                botAvatarInitials: '',
+                botAvatarBackgroundColor: 'transparent',
+                botAvatarImage: 'https://strbotoni.blob.core.windows.net/assets/ONI_Chatbot_positiv_cropped.png',
                 primaryFont: 'AvenirNextLTPro-Regular, sans-serif',
+                secondaryFont: 'AvenirNextLTPro-Regular, sans-serif',
                 bubbleBackground: '#860f91',
                 bubbleTextColor: 'white',
-                bubbleFromUserBackground: 'gray',
-                bubbleFromUserTextColor: 'white',
+                bubbleFromUserBackground: '#f3f3f3',
+                bubbleFromUserTextColor: 'black',
                 bubbleFromUserBorderRadius: 6,
                 bubbleBorderRadius: 6,
             };

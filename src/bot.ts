@@ -1,6 +1,8 @@
 import { ActivityHandler, MessageFactory, ConversationState, UserState } from 'botbuilder';
 import fetch from 'node-fetch';
 
+const WELCOME_TEXT = 'Hello, my name is ONi, how can I help you? \nI can speak different languages.';
+
 export class EchoBot extends ActivityHandler {
     private conversationState: ConversationState;
     private userState: UserState;
@@ -79,10 +81,9 @@ export class EchoBot extends ActivityHandler {
 
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
-            const welcomeText = 'Hello, my name is ONi, how can I help you? \nI can also speak different languages.';
             for (const member of membersAdded) {
                 if (member.id !== context.activity.recipient.id) {
-                    await context.sendActivity(MessageFactory.text(welcomeText, welcomeText));
+                    await context.sendActivity(MessageFactory.text(WELCOME_TEXT, WELCOME_TEXT));
                 }
             }
             // By calling next() you ensure that the next BotHandler is run.
