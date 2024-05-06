@@ -1,4 +1,4 @@
-import { ActivityHandler, MessageFactory, ConversationState, UserState } from 'botbuilder';
+import { ActivityHandler, MessageFactory, ConversationState, UserState, ActivityTypes } from 'botbuilder';
 import fetch from 'node-fetch';
 
 const WELCOME_TEXT = process.env.WELCOME_TEXT || 'Hello, my name is ONi, how can I help you? \nI can speak different languages.';
@@ -34,6 +34,8 @@ export class EchoBot extends ActivityHandler {
 
             console.log("Sending message to PromptFlow API");
             console.log("History: ", conversationHistory.history);
+
+            await context.sendActivities([{ type: ActivityTypes.Typing }]);
 
             try {
                 const response = await fetch(url, {

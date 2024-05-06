@@ -77,7 +77,7 @@
             const { token } = await res.json();
 
             window.WebChat.renderWebChat({
-                directLine: window.WebChat.createDirectLine({ token }), locale, styleOptions
+                directLine: window.WebChat.createDirectLine({ token }), locale, styleOptions, sendTypingIndicator: true
             }, document.getElementById('webchat'));
 
             document.querySelector('#webchat > *').focus();
