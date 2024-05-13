@@ -35,7 +35,10 @@ export class EchoBot extends ActivityHandler {
             console.log("Sending message to PromptFlow API");
             console.log("History: ", conversationHistory.history);
 
-            await context.sendActivities([{ type: ActivityTypes.Typing }]);
+            let typingInterval = setInterval(() => {
+                console.log('Typing');
+                context.sendActivities([{ type: ActivityTypes.Typing }]);
+            }, 2000);
 
             try {
                 const response = await fetch(url, {
@@ -51,6 +54,7 @@ export class EchoBot extends ActivityHandler {
                     let data = await response.json();
                     console.log("Received response from PromptFlow API:", data);
                     await context.sendActivity(MessageFactory.text(data.reply, data.reply));
+                    clearInterval(typingInterval);
                     let chat_history = [];
                     chat_history.push(
                         {
