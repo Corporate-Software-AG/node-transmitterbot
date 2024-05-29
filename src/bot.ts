@@ -27,7 +27,6 @@ export class EchoBot extends ActivityHandler {
                 throw "A key should be provided to invoke the endpoint";
             }
             requestHeaders["Authorization"] = "Bearer " + apiKey;
-            requestHeaders["azureml-model-deployment"] = process.env.PROMPTFLOW_MODEL;
             const url = process.env.PROMPTFLOW_URL;
 
             await this.userState.saveChanges(context);
