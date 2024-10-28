@@ -1,7 +1,7 @@
 import { ActivityHandler, MessageFactory, ConversationState, UserState, ActivityTypes } from 'botbuilder';
 import fetch from 'node-fetch';
 
-const WELCOME_TEXT = process.env.WELCOME_TEXT || 'Hello, my name is ONi, how can I help you? \nI can speak different languages.';
+const WELCOME_TEXT = process.env.WELCOME_TEXT || 'Hello, my name is ONi, how can I help you? \nI can speak English or German.';
 
 export class EchoBot extends ActivityHandler {
     private conversationState: ConversationState;
@@ -21,15 +21,7 @@ export class EchoBot extends ActivityHandler {
                 // Other headers as needed
             };
 
-            // Replace this with the primary/secondary key or AMLToken for the endpoint
-            const apiKey = process.env.PROMPTFLOW_API_KEY;
-            if (!apiKey) {
-                throw "A key should be provided to invoke the endpoint";
-            }
-            requestHeaders["Authorization"] = "Bearer " + apiKey;
-            requestHeaders["azureml-model-deployment"] = process.env.PROMPTFLOW_MODEL;
             const url = process.env.PROMPTFLOW_URL;
-
             await this.userState.saveChanges(context);
 
             console.log("Sending message to PromptFlow API");
